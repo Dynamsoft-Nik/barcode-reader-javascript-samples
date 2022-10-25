@@ -49,7 +49,11 @@
                 let ss = await scanner.getScanSettings();
                 ss.intervalTime = 100;
                 ss.whenToPlaySoundforSuccessfulRead = "frame";
-                await scanner.initRuntimeSettingsWithString('{ \"FormatSpecificationArray\" : [{\"BarcodeFormatIds\": [ \"BF_ALL\"],\"MinResultConfidence\" : 0,\"Name\" : \"f1\"}], \"ImageParameter\": { \"BarcodeFormatIds\": [ \"BF_ALL\" ], \"BarcodeFormatIds_2\": [ \"BF2_NULL\" ], \"DeblurLevel\": 9, \"DeblurModes\": [{\"Mode\": \"DM_DIRECT_BINARIZATION\"},{\"Mode\": \"DM_SHARPENING_SMOOTHING\"},{\"Mode\": \"DM_SHARPENING\"}], \"ExpectedBarcodesCount\": 1, \"LocalizationModes\": [ { \"Mode\": \"LM_CONNECTED_BLOCKS\" },{ \"Mode\" : \"LM_SCAN_DIRECTLY\" } ],\"FormatSpecificationNameArray\" : [\"f1\"],\"ImagePreprocessingModes\": [ { \"Mode\": \"IPM_GENERAL\" }, { \"Mode\": \"IPM_SHARPEN_SMOOTH\" }, { \"Mode\": \"IPM_GRAY_SMOOTH\" } ], \"MaxAlgorithmThreadCount\": 1, \"Name\": \"Settings\", \"Timeout\": 1000000 }, \"Version\": \"3.0\"}');
+                ss.deblurModes[0] =
+            Dynamsoft.DBR.EnumDeblurMode.DM_SHARPENING_SMOOTHING;
+          ss.deblurModes[1] = Dynamsoft.DBR.EnumDeblurMode.DM_SHARPENING;
+          await scanner.updateRuntimeSettings(settings);
+                //await scanner.initRuntimeSettingsWithString('{ \"FormatSpecificationArray\" : [{\"BarcodeFormatIds\": [ \"BF_ALL\"],\"MinResultConfidence\" : 0,\"Name\" : \"f1\"}], \"ImageParameter\": { \"BarcodeFormatIds\": [ \"BF_ALL\" ], \"BarcodeFormatIds_2\": [ \"BF2_NULL\" ], \"DeblurLevel\": 9, \"DeblurModes\": [{\"Mode\": \"DM_DIRECT_BINARIZATION\"},{\"Mode\": \"DM_SHARPENING_SMOOTHING\"},{\"Mode\": \"DM_SHARPENING\"}], \"ExpectedBarcodesCount\": 1, \"LocalizationModes\": [ { \"Mode\": \"LM_CONNECTED_BLOCKS\" },{ \"Mode\" : \"LM_SCAN_DIRECTLY\" } ],\"FormatSpecificationNameArray\" : [\"f1\"],\"ImagePreprocessingModes\": [ { \"Mode\": \"IPM_GENERAL\" }, { \"Mode\": \"IPM_SHARPEN_SMOOTH\" }, { \"Mode\": \"IPM_GRAY_SMOOTH\" } ], \"MaxAlgorithmThreadCount\": 1, \"Name\": \"Settings\", \"Timeout\": 1000000 }, \"Version\": \"3.0\"}');
                 //await scanner.updateScanSettings(ss);
                 scanner.ifSaveOriginalImageInACanvas = true;
                 let processingCount = 0;
